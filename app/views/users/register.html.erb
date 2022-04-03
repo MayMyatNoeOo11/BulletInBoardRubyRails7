@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h4 class="mt-4 mb-4 display-4">New User</h4>
+  </div>
+  <div class="row justify-content-center">
+  <%= form_for @user, :url =>{:action => "confirm"}  do |form| %>
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, autofocus: true, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :address %>
+        <%= form.text_area :address, class: 'form-control' %>
+     </div>
+     <div class="form-group">
+        <%= form.label :phone %>
+        <%= form.number_field :phone, class: 'form-control' %>
+     </div>
+     <div class="form-group">
+        <%= form.label :date_of_birth %>
+        <%= form.date_field :date_of_birth, class: 'form-control' %>
+     </div>
+     <div class="form-group">
+        <%= form.label :profile_photo %>
+        <%= form.text_field  :profile_photo, class: 'form-control' %>
+      </div>
+    <br>
+    <div class="form-group">
+        <%= form.submit "Create User",class: 'btn-success'  %>
+        <%= submit_tag("Clear", { :name => 'reset', :id => 'reset_button', :type => "reset", :class => 'btn-primary'}) %>
+    </div>
+    <br>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+
+<div class="container">
+<div class="row justify-content-center">
+  <h4 class="mt-4 display-4">User List</h4>
+</div>
+<div class="row justify-content-center">
+ 
+</div>
+<div class="row justify-content-center" >
+<%= form_tag(users_path, method: 'get') do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag("Search") %> 
+<% end %>
+<%= button_to "Create User", register_path, method: :get, class:"btn-success mt-4", style:"margin-bottom:10px"%>
+
+<div>
+<% if @users.present? %>
+  <div class="row justify-content-center">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col" colspan="3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td style="width: 60px;"><%= link_to 'Show', user_path(user.id), class: 'form-control btn-primary' %></td>    
+            <td style="width: 60px;"><%= link_to 'Edit', edit_user_path(user.id), class: 'form-control btn-primary' %></td>          
+            <td style="width: 60px;"><%= link_to 'Delete', user_path(user.id), class: 'form-control btn-danger', data: {
+              turbo_method: :delete,
+              turbo_confirm: "Are you sure to delete?"
+            } %></td>   
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+
+  </div>
+<% else %>
+  <div class="p-3 mb-2 bg-light text-dark">
+    <span class="text-info font-weight-bold">Welcome! </span>
+    Create your first user
+  </div>
+<% end %>
+</div>
